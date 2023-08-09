@@ -38,6 +38,10 @@ const toggleShowDetails = () => {
         showDetails.value = false;
     } else {
         showDetails.value = true;
+
+
+
+
     }
 //write showdetails to console
     console.log(`showDetails: ${showDetails.value}`);
@@ -47,9 +51,7 @@ const toggleShowDetails = () => {
 
 const saveState = (savestateID: number) => {
     localStorage.setItem(`tokens${savestateID}`, JSON.stringify(tokens.$state));
-    latestsavestateID.value = savestateID;
-
-    console.log(`State saved with ID ${savestateID}:`, `tokens${savestateID}`.$state);
+    latestsavestateID.value = savestateID;  
 };
 
 
@@ -150,9 +152,9 @@ const activeCharacter = computed(() => {
     </section>
 
     <section v-if="showDetails" class="container" >
-hello
+        showDetails 
         <main  class="details">
-            <TokenDetails v-for="item in tokens.items" :key="item.key" :item="item" />
+            <TokenDetails v-for="item in tokens.items" :key="item.key" :item="item" active class="token-details2"/>
         </main>
     </section>
 

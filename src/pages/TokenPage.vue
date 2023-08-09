@@ -8,6 +8,9 @@ const props = defineProps<{ slug: string }>()
 const tokens = useTokens()
 
 const item = computed(() => tokens.getItemByKey(props.slug))
+// write item to consol
+console.log('item=' + item.value)
+
 </script>
 
 <template>

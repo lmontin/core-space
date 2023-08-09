@@ -9,7 +9,9 @@ import { computed } from 'vue'
 const props = withDefaults(
     defineProps<{ item: CoreSpaceToken; active?: boolean }>(),
     { active: false }
+
 )
+
 
 const tag = computed(() => (props.active ? 'div' : 'router-link'))
 
@@ -58,6 +60,10 @@ const mustacheIcons = computed(() => {
     ]
     return icons.filter((x) => x.value != undefined)
 })
+
+//write hello2 to consol
+console.log("hello2")
+
 </script>
 
 <template>
@@ -189,7 +195,7 @@ const mustacheIcons = computed(() => {
 
     &.active {
         position: relative;
-        flex: 1;
+        flex: auto;
         max-width: 900px;
         grid-template-columns: auto 1fr;
         grid-gap: 1rem 1rem;

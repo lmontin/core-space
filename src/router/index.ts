@@ -5,7 +5,11 @@ const TokenPage = () => import('@/pages/TokenPage.vue')
 const SettingsPage = () => import('@/pages/SettingsPage.vue')
 
 const routes = [
-    { path: '/', component: TokensPage, meta: { search: true } },
+    {
+        path: '/',
+        component: TokensPage,
+        meta: { search: true },
+    },
     {
         path: '/item/:slug',
         component: TokenPage,

@@ -25,3 +25,4 @@ dist-ssr
 
 # generated files
 src/assets/generated/*.txt
+vite.config.ts
