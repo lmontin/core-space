@@ -8,11 +8,6 @@ import TokenDetails from '@/components/tokens/TokenDetails.vue'
 
 const showDetails = ref(false)
 
-
-
-    
-
-
 const tokens = useTokens()  
 
 const qSummary = computed(
@@ -40,11 +35,9 @@ const toggleShowDetails = () => {
         showDetails.value = true;
 
 
-
-
     }
 //write showdetails to console
-    console.log(`showDetails: ${showDetails.value}`);
+   // console.log(`showDetails: ${showDetails.value}`);
 
 }
 
@@ -54,7 +47,25 @@ const saveState = (savestateID: number) => {
     latestsavestateID.value = savestateID;  
 };
 
+//create const called addToState that adds the current token state to the localstorage that is passed in as a parameter
+const addToState = (savestateID: number) => {
+    const newTokenQ = tokens.q;
+    const savedState = localStorage.getItem(`tokens${savestateID}`);
 
+    if (savedState) {
+        tokens.$state = JSON.parse(savedState);
+    }
+
+    tokens.q = tokens.$state.q + ',' + newTokenQ
+    document.getElementById("q").value = tokens.$state.q + ',' + newTokenQ
+    
+    localStorage.setItem(`tokens${savestateID}`, JSON.stringify(tokens.$state));
+
+    latestsavestateID.value = savestateID;
+}
+
+    //write tokens.$state to console
+    console.log(`State saved with ID ${latestsavestateID.value}:`, tokens.$state);
 
 const restoreState = (savestateID: number) => {
     const savedState = localStorage.getItem(`tokens${savestateID}`);
@@ -66,11 +77,8 @@ const restoreState = (savestateID: number) => {
 // set the vlaue of the serachinput element to the value of the q property
         // @ts-ignore   
         document.getElementById("q").value = tokens.$state.q;
-        
+        console.log(`State restored with ID ${savestateID}:`, tokens.$state.q);
 
-
-
-        console.log(`State restored with ID ${savestateID}:`, tokens.$state);
     }
 };
 
@@ -98,8 +106,8 @@ const activeCharacter = computed(() => {
 </script>
 
 <template>
-  
-  <button class="buy-me-a-coffee" @click="toggleShowDetails">Details View</button>
+    
+<button v-if="tokens.items.length <= 20" class="buy-me-a-coffee" @click="toggleShowDetails">{{ showDetails ? 'Icon View' : 'Details View' }}</button>
 
     <h1>Active Character: {{ activeCharacter }}</h1>
     <div class="state-buttons,buy-me-a-coffee">
@@ -108,22 +116,33 @@ const activeCharacter = computed(() => {
         &nbsp;&nbsp;
          <button class="buy-me-a-coffee" @click="restoreState(1)">Restore Cassie</button>
          &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  
+         <button class="buy-me-a-coffee" @click="addToState(1)">Add to Cassie</button>
+         &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  
         <button class="buy-me-a-coffee" @click="saveState(2)">Save Balcor</button>
         &nbsp;&nbsp;
         <button class="buy-me-a-coffee" @click="restoreState(2)">Restore Balcor</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 
+        <button class="buy-me-a-coffee" @click="addToState(2)">Add to Balcor</button>
+ 
         &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
          <button class="buy-me-a-coffee" @click="saveState(3)">Save Wade</button>
         
         &nbsp;&nbsp;
          <button class="buy-me-a-coffee" @click="restoreState(3)">Restore Wade</button>
+         &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 
+        <button class="buy-me-a-coffee" @click="addToState(3)">Add to Wade</button>         
          &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="buy-me-a-coffee" @click="saveState(4)">Save Hopper</button>
         &nbsp;&nbsp;
         <button class="buy-me-a-coffee" @click="restoreState(4)">Restore Hopper</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 
+        <button class="buy-me-a-coffee" @click="addToState(4)">Add to Hopper</button>   
         &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="buy-me-a-coffee" @click="saveState(5)">Save Ship</button>
         &nbsp;&nbsp;
         <button class="buy-me-a-coffee" @click="restoreState(5)">Restore Ship</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 
+        <button class="buy-me-a-coffee" @click="addToState(5)">Add to Ship</button>           
     </div>        
   
     <section v-if="!showDetails" class="container">

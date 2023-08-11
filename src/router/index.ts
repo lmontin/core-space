@@ -9,12 +9,20 @@ const routes = [
         path: '/',
         component: TokensPage,
         meta: { search: true },
+        beforeEnter: (to, from, next) => {
+            console.log(`Navigating to ${to.path}`)
+            next()
+        }
     },
     {
         path: '/item/:slug',
         component: TokenPage,
         props: true,
         meta: { search: true, back: true },
+        beforeEnter: (to, from, next) => {
+            console.log(`Navigating to ${to.path}`)
+            next()
+        }
     },
     { path: '/settings', component: SettingsPage, meta: { back: true } },
 ]

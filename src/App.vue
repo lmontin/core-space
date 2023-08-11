@@ -31,9 +31,13 @@ const onKeyPress = (ev: KeyboardEvent) => {
     />
     <main ref="main" class="content" tabindex="-1" @keyup="onKeyPress">
         <router-view v-slot="{ Component, route }">
+          <!--
             <transition mode="out-in" name="slide-fade">
                 <component :is="Component" :key="route.path" />
             </transition>
+            -->
+            <component :is="Component" :key="route.path" />
+            
         </router-view>
 
         <ToTopButton />

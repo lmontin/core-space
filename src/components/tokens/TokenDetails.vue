@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+console.log('tokendetails.vue component loaded ')
+
+
 import IconLegend from '@/components/tokens/IconLegend.vue'
 import JustText from '@/components/tokens/JustText.vue'
 import BuyWithCrystals from '@/components/tokens/BuyWithCrystals.vue'
@@ -62,7 +65,8 @@ const mustacheIcons = computed(() => {
 })
 
 //write hello2 to consol
-console.log("hello2")
+console.log("tokendetails.vue component loaded")
+
 
 </script>
 

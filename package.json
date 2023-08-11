@@ -9,9 +9,12 @@
     "build": "vue-tsc --noEmit && vite build ",
     "preview": "vite preview",
     "sprite": "node build/sprite.cjs",
-    "i18n": "node build/i18n.cjs"
+    "i18n": "node build/i18n.cjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "debug": "^4.3.4",
     "pinia": "^2.0.29",
     "sass": "^1.57.1",
     "vue": "^3.2.45",
@@ -29,6 +32,7 @@
     "eslint-config-typescript": "^3.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
+    "gh-pages": "^5.0.0",
     "i": "^0.3.7",
     "normalize.css": "^8.0.1",
     "postcss-preset-env": "^7.8.3",

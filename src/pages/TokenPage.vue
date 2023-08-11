@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+console.log('helllo=')
+
+
+
 import TokenDetails from '@/components/tokens/TokenDetails.vue'
 
 import { useTokens } from '@/stores/tokens'
